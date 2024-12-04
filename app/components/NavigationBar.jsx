@@ -1,6 +1,8 @@
 import React from "react";
 import BreifcaseIcon from "../assets/BriefcaseIcon";
 import BellIcon from "../assets/BellIcon";
+import Profile  from "../assets/Profile"; 
+
 function NavigationBar() {
   return (
     <div>
@@ -11,7 +13,7 @@ function NavigationBar() {
         </div>
         <div className="flex items-center gap-4">
           <BellIcon width={20} height={20}/>
-          <div>Profile</div>
+          <Profile width={30} height={30}/>
         </div>
       </div>
     </div>

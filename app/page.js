@@ -1,53 +1,86 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NavigationBar from "./components/NavigationBar";
 import Search from "./components/Search";
 import Card from "./components/Card";
-import { useQuery } from "@tanstack/react-query";
-import * as cheerio from "cheerio";
+import Skeleton from "./components/Skeleton";
+import { FetchAndFind } from "./FetchAndFind";
 
-function Home() {
-  const [filters, setFilters] = useState({ keyword: "", location: "" });
-  const [jobs, setJobs] = useState({});
+export default function Home() {
+  const [filters, setFilters] = useState({
+    keyword: "",
+    location: "",
+  });
 
-  async function ParseHTML() {
-    const apiUrl =
-      "https://remote-jobs.remote-jobs-legacy.workers.dev/jobs?offset=1";
+  const {
+    data,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+    refetch,
+    status,
+  } = FetchAndFind(filters);
 
-    // Fetch HTML response from the API
-    const response = await fetch(apiUrl);
-    const html = await response.text();
+  const jobs = data?.pages.flatMap((page) => page.jobs) || [];
 
-    const $ = cheerio.load(html);
+  const handleScroll = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop >=
+      document.documentElement.offsetHeight - 10
+    ) {
+      if (hasNextPage && !isFetchingNextPage) {
+        fetchNextPage();
+      }
+    }
+  };
 
-    // Extracting data from the <tr> element
-    const jobTitle = $('h2[itemprop="title"]').text().trim().split("\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t");
-    const companyName = $('h3[itemprop="name"]').text().trim().split("\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t");
-    const salary = $("div.location").eq(1).text().trim(); // Salary is in second <div> with class "location"
-   /// const jobUrl = $("a.preventLink").attr("href").trim();
-   // const jobId = $("tr").attr("data-id");
-  
-    setJobs({
-      title: jobTitle,
-      company_name: companyName,
-      salary: salary,
-     // jobUrl: jobUrl,
-     // jobId: jobId,
-    });
-  }
-  ParseHTML();
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [hasNextPage, isFetchingNextPage]);
+
+  useEffect(() => {
+    refetch();
+  }, [filters]);
 
   return (
     <div>
       <NavigationBar />
-      <Search />
-      <div className="grid sm: grid-cols-2 lg:grid-cols-3">
-        {jobs.title?jobs.title.map((job, index) => (
-          <Card key={index} title={job} company_name={jobs.company_name[index]}/>
-        )):"Loading ....."}
+      <Search setFilters={setFilters} />
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+        {status === "loading" ? (
+          <>
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+          </>
+        ) : (
+          jobs.length > 0 ? (
+            jobs.map((job, index) => (
+              <Card
+                key={index}
+                title={job.title}
+                company_name={job.company_name}
+                salary={job.salary}
+                jobType={job.jobType}
+              />
+            ))
+          ) : (
+            <p>No Jobs Found!</p>
+          )
+        )}
       </div>
+      {isFetchingNextPage && <div className="grid grid-cols-3">
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+          </div>}
     </div>
   );
 }
-
-export default Home;

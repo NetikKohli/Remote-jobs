@@ -7,7 +7,7 @@ function Card({title,company_name, salary, jobUrl, jobId}) {
         <div className='font-semibold'>{title}</div>
         <div className='flex gap-5'>
             <div className='text-red-500 bg-gray-200 pl-2 pr-2 font-semibold'>Remote</div>
-            <div>Salary: <span>$20000</span> - <span>$20000</span></div>
+            <div>Salary: {salary}</div>
         </div>
         <div className='flex justify-between mt-6 items-center'>
             <div className='flex justify-between'>
@@ -18,6 +18,7 @@ function Card({title,company_name, salary, jobUrl, jobId}) {
             </div>
             </div>
             <BookmarkIcon/>
+            
         </div>
     </div>
   )
