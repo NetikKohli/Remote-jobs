@@ -22,7 +22,8 @@ export default function Home() {
   } = FetchAndFind(filters);
 
   const jobs = data?.pages.flatMap((page) => page.jobs) || [];
-
+  
+  
   const handleScroll = () => {
     if (
       window.innerHeight + document.documentElement.scrollTop >=
@@ -47,8 +48,8 @@ export default function Home() {
     <div>
       <NavigationBar />
       <Search setFilters={setFilters} />
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-        {(status === "loading" || isFetchingNextPage) ? (
+      <div className="grid grid-cols-3 lg:gap-4 lg:p-4">
+        {(status === "loading" ) ? (
           <>
             <Skeleton />
             <Skeleton />
@@ -66,14 +67,23 @@ export default function Home() {
                 company_name={job.company_name}
                 salary={job.salary}
                 jobType={job.jobType}
+                address={job.address}
               />
+              
             ))
           ) : (
             <p>No Jobs Found!</p>
           )
         )}
       </div>
-      
+      {isFetchingNextPage && <div className="grid grid-cols-3 lg:gap-3 max-sm:gap-1">
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+            <Skeleton />
+          </div>}
     </div>
   );
 }

@@ -14,19 +14,34 @@ const fetchJobs = async ({ pageParam = 1, filters }) => {
 
   $('script[type="application/ld+json"]').each((index, element) => {
     const item = JSON.parse($(element).html());
-
-    const jobLocation = item.jobLocation?.address?.addressLocality || ''; // Safeguard
     
+    let jobLocation = String(item.jobLocation?.[0]?.address?.addressCountry); // Safeguard
+
+    if(jobLocation == "undefined"){
+      jobLocation = "Worldwide"
+    }
+
     // Filter jobs based on criteria
     if (
-      (!keyword || item.title.toLowerCase().includes(keyword.toLowerCase()) || jobLocation.toLowerCase().includes(keyword.toLowerCase().trim())|| item.hiringOrganization.name.toLowerCase().includes(keyword.toLowerCase().trim())) &&
-      (!location || jobLocation.toLowerCase().includes(location.toLowerCase()) || location.toLowerCase()=='remote' || location.toLowerCase().includes('any')||item.hiringOrganization.name.toLowerCase().includes(location.toLowerCase().trim()))
+      (!keyword ||
+        item.title.toLowerCase().includes(keyword.toLowerCase()) ||
+        jobLocation.toLowerCase().includes(keyword.toLowerCase().trim()) ||
+        item.hiringOrganization.name
+          .toLowerCase()
+          .includes(keyword.toLowerCase().trim())) &&
+      (!location ||
+        jobLocation.toLowerCase().includes(location.toLowerCase()) ||
+        location.toLowerCase() == "remote" ||
+        item.hiringOrganization.name
+          .toLowerCase()
+          .includes(location.toLowerCase().trim()))
     ) {
       jobs.push({
         title: item.title,
         company_name: item.hiringOrganization.name,
         salary: `$${item.baseSalary.value.minValue} - $${item.baseSalary.value.maxValue}`,
         jobType: item.employmentType,
+        address: jobLocation,
       });
     }
   });

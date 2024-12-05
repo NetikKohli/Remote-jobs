@@ -35,7 +35,7 @@ function Search({ setFilters }) {
           />
           <button
             type="submit"
-            className="bg-blue-700 text-white px-2 py-2 sm:w-1/2 lg:w-1/3"
+            className="bg-blue-700 text-white px-2 py-2 sm:w-1/2 lg:w-1/3 max-sm:text-[7px] max-sm:w-14"
           >
             Find Job
           </button>
