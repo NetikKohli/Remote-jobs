@@ -16,11 +16,11 @@ const fetchJobs = async ({ pageParam = 1, filters }) => {
     const item = JSON.parse($(element).html());
 
     const jobLocation = item.jobLocation?.address?.addressLocality || ''; // Safeguard
-
+    
     // Filter jobs based on criteria
     if (
-      (!keyword || item.title.toLowerCase().includes(keyword.toLowerCase())) &&
-      (!location || jobLocation.toLowerCase().includes(location.toLowerCase()) || location.toLowerCase()=='remote' || location.toLowerCase().includes('any'))
+      (!keyword || item.title.toLowerCase().includes(keyword.toLowerCase()) || jobLocation.toLowerCase().includes(keyword.toLowerCase().trim())|| item.hiringOrganization.name.toLowerCase().includes(keyword.toLowerCase().trim())) &&
+      (!location || jobLocation.toLowerCase().includes(location.toLowerCase()) || location.toLowerCase()=='remote' || location.toLowerCase().includes('any')||item.hiringOrganization.name.toLowerCase().includes(location.toLowerCase().trim()))
     ) {
       jobs.push({
         title: item.title,
