@@ -37,8 +37,8 @@ const fetchJobs = async ({ pageParam = 1, filters }) => {
           .includes(location.toLowerCase().trim()))
     ) {
       jobs.push({
-        title: item.title,
-        company_name: item.hiringOrganization.name,
+        title: item.title.replace("&amp;",""),
+        company_name: item.hiringOrganization.name.replace("&amp;",""),
         salary: `$${item.baseSalary.value.minValue} - $${item.baseSalary.value.maxValue}`,
         jobType: item.employmentType,
         address: jobLocation,

@@ -48,7 +48,7 @@ export default function Home() {
     <div>
       <NavigationBar />
       <Search setFilters={setFilters} />
-      <div className="grid grid-cols-3 lg:gap-4 lg:p-4">
+      <div className="grid grid-cols-3 lg:gap-4 lg:p-4 max-sm:gap-1">
         {(status === "loading" ) ? (
           <>
             <Skeleton />

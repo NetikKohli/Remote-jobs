@@ -14,7 +14,7 @@ function Search({ setFilters }) {
   return (
     <div className="w-full flex justify-center">
       <form
-        className="border-2 flex mt-3 justify-center items-center w-2/3 shadow-md rounded-lg"
+        className="border-2 flex mt-3 max-sm:w-[90%] max-sm:mb-4 justify-center items-center w-2/3 shadow-md rounded-lg"
         onSubmit={onSearchSubmit}
       >
         <div className="p-2 flex items-center w-full">
@@ -35,7 +35,7 @@ function Search({ setFilters }) {
           />
           <button
             type="submit"
-            className="bg-blue-700 text-white px-2 py-2 sm:w-1/2 lg:w-1/3 max-sm:text-[7px] max-sm:w-14"
+            className="bg-blue-700 text-white p-2 sm:w-1/2 lg:w-1/3 max-sm:text-[14px] max-sm:w-36 max-sm:p-0"
           >
             Find Job
           </button>
