@@ -37,7 +37,6 @@ const fetchJobs = async ({ pageParam = 1, filters }) => {
     if (
       (!keyword ||
         item.title.toLowerCase().includes(keyword.toLowerCase()) ||
-        jobLocation.toLowerCase().includes(keyword.toLowerCase().trim()) ||
         companyName.toLowerCase().includes(keyword.toLowerCase().trim())) &&
       (!location ||
         jobLocation.toLowerCase().includes(location.toLowerCase()) ||
