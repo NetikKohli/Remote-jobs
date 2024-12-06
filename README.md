@@ -15,7 +15,8 @@ npm run dev
 4️⃣ Open in Browser
 Visit 👉 http://localhost:3000 to see the app in action.
 
-📋 Overview
+
+#📋 Overview
 RemoteJobs is a job-finding web app built with Next.js. It parses HTML responses from a legacy API and displays job listings dynamically.
 
 🌟 Key Features
