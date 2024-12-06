@@ -45,7 +45,7 @@ export default function Home() {
   }, [filters]);
 
   return (
-    <div>
+    <div className="w-screen h-screen overflow-x-hidden">
       <NavigationBar />
       <Search setFilters={setFilters} />
       <div className="grid grid-cols-3 lg:gap-4 lg:p-4 max-sm:gap-1">
@@ -73,11 +73,13 @@ export default function Home() {
               
             ))
           ) : (
-            <p>No Jobs Found!</p>
+            <div className="flex justify-center items-center h-72 overflow-none w-screen">
+              <h1 className="text-2xl font-bold text-gray-500">Ohh No Job Found ...</h1>
+            </div>  
           )
         )}
       </div>
-      {isFetchingNextPage && <div className="grid grid-cols-3 lg:gap-3 max-sm:gap-1">      {/*It shows at the time of fetching new jobs during scrolling(infinte)*/}
+      {isFetchingNextPage && <div className="grid grid-cols-3 lg:gap-3 max-sm:gap-1"> 
             <Skeleton />
             <Skeleton />
             <Skeleton />

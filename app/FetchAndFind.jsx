@@ -37,7 +37,7 @@ const fetchJobs = async ({ pageParam = 1, filters }) => {
     if (
       (!keyword ||
         item.title.toLowerCase().includes(keyword.toLowerCase()) ||
-        companyName.toLowerCase().includes(keyword.toLowerCase().trim())) &&
+        companyName.toLowerCase().includes(keyword.toLowerCase())) &&
       (!location ||
         jobLocation.toLowerCase().includes(location.toLowerCase()) ||
         location.toLowerCase() == "remote")

@@ -1,7 +1,8 @@
 "use client";
 import React from "react";
 import SearchIcon from "../assets/Search_icon";
-
+import LocationForSearch from "../assets/LocationForSearch";
+import Target from "../assets/Target";
 
 function Search({ setFilters }) {
   const onSearchSubmit = (e) => {
@@ -23,20 +24,22 @@ function Search({ setFilters }) {
           <input
             type="text"
             name="keyword"
-            placeholder="Search by Job title, position, keyword..."
+            placeholder="Search by: Job title, position, keyword..."
             className="p-2 flex-1 w-full border-none outline-none"
           />
         </div>
         <div className="border-l-2 flex justify-between p-2 w-full items-center">
+          <LocationForSearch width={30} height={25}/>
           <input
             type="text"
             name="location"
             placeholder="Location"
             className="p-2 rounded w-full border-none outline-none"
           />
+          <Target/>
           <button
             type="submit"
-            className="bg-blue-700 text-white p-2 sm:w-1/2 lg:w-1/3 max-sm:text-[14px] max-sm:w-36 max-sm:p-0"
+            className="bg-blue-700 text-white p-2 sm:w-1/2 lg:w-1/3 max-sm:text-[14px] max-sm:w-36 max-sm:p-0 ml-3"
           >
             Find Job
           </button>

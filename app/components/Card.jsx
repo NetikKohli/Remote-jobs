@@ -18,7 +18,7 @@ function Card({ title, salary, company_logo, company_name, address }) {
       <div className="flex justify-between items-center">
         <div className="flex items-center">
             <img
-              className="sm:w-10 max-sm:h-5 max-sm:w-5 sm:h-10 mr-3 rounded-sm object-contain"
+              className="sm:w-10 max-sm:h-5 max-sm:w-5 sm:h-10 mr-3 rounded-md object-contain border border-gray-200"
               src={company_logo}
               alt="Logo"
             />
@@ -26,7 +26,7 @@ function Card({ title, salary, company_logo, company_name, address }) {
               <div className="font-semibold text-gray-800">
                 {company_name}
               </div>
-              <div className="text-gray-500 flex items-center gap-1 p-1"><Location/> {address}</div>
+              <div className="text-gray-500 flex items-center gap-1 "><Location/> {address}</div>
             </div>
         </div>
 
