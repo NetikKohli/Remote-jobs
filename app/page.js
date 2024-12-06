@@ -68,6 +68,7 @@ export default function Home() {
                 salary={job.salary}
                 jobType={job.jobType}
                 address={job.address}
+                company_logo={job.company_logo}
               />
               
             ))
@@ -76,7 +77,7 @@ export default function Home() {
           )
         )}
       </div>
-      {isFetchingNextPage && <div className="grid grid-cols-3 lg:gap-3 max-sm:gap-1">
+      {isFetchingNextPage && <div className="grid grid-cols-3 lg:gap-3 max-sm:gap-1">      {/*It shows at the time of fetching new jobs during scrolling(infinte)*/}
             <Skeleton />
             <Skeleton />
             <Skeleton />

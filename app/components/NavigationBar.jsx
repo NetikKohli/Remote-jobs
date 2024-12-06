@@ -5,8 +5,8 @@ import Profile  from "../assets/Profile";
 
 function NavigationBar() {
   return (
-    <div>
-      <div className="flex justify-between items-center border-b-2 w-screen p-6 border-zinc-200">
+    <nav>
+      <div className="flex justify-between items-center border-b-2 w-screen p-5 border-zinc-200">
         <div className="flex gap-5">
           <BreifcaseIcon />
           <div className="text-2xl font-bold">Remote Jobs</div>
@@ -16,7 +16,7 @@ function NavigationBar() {
           <Profile width={30} height={30}/>
         </div>
       </div>
-    </div>
+    </nav>
   );
 }
 

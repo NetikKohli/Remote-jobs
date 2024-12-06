@@ -1,4 +1,3 @@
-import * as React from "react";
 const BookmarkIcon = (props) => (
   <svg
     width={30}

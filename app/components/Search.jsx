@@ -2,6 +2,7 @@
 import React from "react";
 import SearchIcon from "../assets/Search_icon";
 
+
 function Search({ setFilters }) {
   const onSearchSubmit = (e) => {
     e.preventDefault();
@@ -26,7 +27,7 @@ function Search({ setFilters }) {
             className="p-2 flex-1 w-full border-none outline-none"
           />
         </div>
-        <div className="border-l-2 flex justify-between p-2 w-full">
+        <div className="border-l-2 flex justify-between p-2 w-full items-center">
           <input
             type="text"
             name="location"

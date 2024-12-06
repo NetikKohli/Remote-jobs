@@ -14,11 +14,23 @@ const fetchJobs = async ({ pageParam = 1, filters }) => {
 
   $('script[type="application/ld+json"]').each((index, element) => {
     const item = JSON.parse($(element).html());
-    
-    let jobLocation = String(item.jobLocation?.[0]?.address?.addressCountry); // Safeguard
 
-    if(jobLocation == "undefined"){
-      jobLocation = "Worldwide"
+    const jobTitle = item.title.replace("&amp;", "");
+    const companyName = item.hiringOrganization.name.replace("&amp;", "");
+    
+    //when icon is present then show that icon other a default icon to represent an organization
+    const companyLogo = item.image?item.image: "https://cdn-icons-png.freepik.com/256/4300/4300058.png?ga=GA1.1.727125107.1722242636&semt=ais_hybrid";
+
+    const jobSalary = `$${item.baseSalary.value.minValue} - $${item.baseSalary.value.maxValue}`;
+    const jobType = item.employmentType;
+    const companyUrl = item.hiringOrganization.url;
+    let jobLocation = String(item.jobLocation?.[0]?.address?.addressCountry);
+
+    const description = item.description.replace("&amp;", "");
+    console.log(companyLogo);
+
+    if (jobLocation == "undefined") {
+      jobLocation = "Worldwide";
     }
 
     // Filter jobs based on criteria
@@ -26,22 +38,21 @@ const fetchJobs = async ({ pageParam = 1, filters }) => {
       (!keyword ||
         item.title.toLowerCase().includes(keyword.toLowerCase()) ||
         jobLocation.toLowerCase().includes(keyword.toLowerCase().trim()) ||
-        item.hiringOrganization.name
-          .toLowerCase()
-          .includes(keyword.toLowerCase().trim())) &&
+        companyName.toLowerCase().includes(keyword.toLowerCase().trim())) &&
       (!location ||
         jobLocation.toLowerCase().includes(location.toLowerCase()) ||
-        location.toLowerCase() == "remote" ||
-        item.hiringOrganization.name
-          .toLowerCase()
-          .includes(location.toLowerCase().trim()))
+        location.toLowerCase() == "remote")
     ) {
+      //if condition scope starts here
       jobs.push({
-        title: item.title.replace("&amp;",""),
-        company_name: item.hiringOrganization.name.replace("&amp;",""),
-        salary: `$${item.baseSalary.value.minValue} - $${item.baseSalary.value.maxValue}`,
-        jobType: item.employmentType,
+        title: jobTitle,
+        company_name: companyName,
+        salary: jobSalary,
+        jobType: jobType,
+        company_logo: companyLogo,
         address: jobLocation,
+        description: description,
+        company_url: companyUrl,
       });
     }
   });

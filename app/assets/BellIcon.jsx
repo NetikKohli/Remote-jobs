@@ -1,4 +1,3 @@
-import * as React from "react";
 const BellIcon = (props) => (
   <svg
     fill="#000000"
