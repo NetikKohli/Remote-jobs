@@ -1,4 +1,3 @@
-
 ## Overview
 Parse HTML responses from the legacy API and show jobs to the users. Supports searching by keyword and location, and features infinite scrolling to load more jobs dynamically. It also includes user-friendly skeleton loading for a better user experience during data fetching.
 
@@ -32,19 +31,16 @@ Key Features: Displays six loading placeholders with animated skeletons
 The fetchJobs function fetches job data using an API.
 Response Parsing: Extracts job details (title, company, salary, location) using Cheerio.
 Handles undefined or missing fields.
-    |
-    V
+  
 # Infinite Scrolling -
 Listens to the scroll event.
 Checks if the user has scrolled near the bottom of the page.
 Fetches the next batch of jobs when conditions are met.
-    |
-    V
+
 # Search -
 Users enter search criteria in the Search component.
 Filters are updated, and data fetching re-triggers with new parameters.
-    |
-    V
+
 # Rendering -
 Displays SkeletonLoader when jobs are loading.
 Job Cards if jobs are available.
