@@ -1,22 +1,22 @@
 # 🌐 RemoteJobs
-Live Link: https://remote-jobs-jade.vercel.app/
+Live Link: (https://remote-jobs-jade.vercel.app/)
 
 # Getting Started
-1️⃣ Clone the Repository
-git clone https://github.com/NetikKohli/Remote-jobs
-cd remote-jobs
+1️⃣ Clone the Repository :
+```git clone https://github.com/NetikKohli/Remote-jobs ```
+```cd remote-jobs ```
 
-2️⃣ Install Dependencies
-npm install
+2️⃣ Install Dependencies: 
+``` npm install ```
 
 3️⃣ Start the Development Server
-npm run dev
+```npm run dev ```
 
 4️⃣ Open in Browser
-Visit 👉 http://localhost:3000 to see the app in action.
+Visit 👉 (http://localhost:3000) to see the app in action.
 
 
-#📋 Overview
+ 📋 Overview
 RemoteJobs is a job-finding web app built with Next.js. It parses HTML responses from a legacy API and displays job listings dynamically.
 
 🌟 Key Features
